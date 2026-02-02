@@ -1,101 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INEC Voting Portal</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>INEC — Live Voting</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Simple, accessible demo of a live voting UI — client-only demo for development and testing.">
 </head>
 <body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="IMG_0094.webp" alt="" aria-hidden="true" class="brand-logo">
+      <div>
+        <h1>INEC — Live Vote</h1>
+        <p class="tagline">Transparent counts · Accessible · Simple demo</p>
+      </div>
+    </div>
+  </header>
 
-<header>
-  <h1>Independent National Electoral Commission</h1>
-  <p>Live Voting & Result Collation</p>
-</header>
+  <main class="container" id="main" tabindex="-1">
+    <section class="panel vote-panel" aria-labelledby="voteTitle">
+      <h2 id="voteTitle">Cast your vote</h2>
+      <p class="lead">Choose one party and submit once. This demo stores votes locally in your browser.</p>
 
-<main class="container">
+      <form id="voteForm" class="party-list" aria-describedby="voteHelp">
+        <p id="voteHelp" class="sr-only">Use arrow keys to move between options, space or enter to select.</p>
 
-  <section class="instructions">
-    <h2>Voting Instructions</h2>
-    <ol>
-      <li>Select only one political party</li>
-      <li>Submit your vote once</li>
-      <li>Results update instantly</li>
-    </ol>
-  </section>
-
-  <section class="vote-section">
-    <h2>Cast Your Vote</h2>
-
-    <form id="voteForm">
-
-      <!-- APC -->
-      <label class="party-card">
-        <input type="radio" name="party" value="apc">
-
-        <div class="party-content">
-          <img src="IMG_0094.webp" alt="APC">
-          <div class="details">
-            <h3>APC</h3>
-            <p>
-              <strong id="apcVotes">0</strong> votes —
-              <strong id="apcPercent">0%</strong>
-            </p>
-            <div class="bar">
-              <div id="apcBar"></div>
+        <fieldset class="options" aria-label="Parties">
+          <!-- APC -->
+          <label class="party" for="apc">
+            <input id="apc" name="party" type="radio" value="apc">
+            <div class="party-inner">
+              <img class="party-logo" src="IMG_0094.webp" alt="APC logo" loading="lazy">
+              <div class="party-info">
+                <div class="party-name">APC</div>
+                <div class="party-stats">
+                  <span class="votes" id="apcVotes">0</span>
+                  <span class="percent" id="apcPercent">0%</span>
+                </div>
+                <div class="bar">
+                  <div class="bar-fill" id="apcBar" style="width:0%"></div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </label>
+          </label>
 
-      <!-- PDP -->
-      <label class="party-card">
-        <input type="radio" name="party" value="pdp">
-
-        <div class="party-content">
-          <img src="IMG_0095.webp" alt="PDP">
-          <div class="details">
-            <h3>PDP</h3>
-            <p>
-              <strong id="pdpVotes">0</strong> votes —
-              <strong id="pdpPercent">0%</strong>
-            </p>
-            <div class="bar">
-              <div id="pdpBar"></div>
+          <!-- PDP -->
+          <label class="party" for="pdp">
+            <input id="pdp" name="party" type="radio" value="pdp">
+            <div class="party-inner">
+              <img class="party-logo" src="IMG_0095.webp" alt="PDP logo" loading="lazy">
+              <div class="party-info">
+                <div class="party-name">PDP</div>
+                <div class="party-stats">
+                  <span class="votes" id="pdpVotes">0</span>
+                  <span class="percent" id="pdpPercent">0%</span>
+                </div>
+                <div class="bar">
+                  <div class="bar-fill" id="pdpBar" style="width:0%"></div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </label>
+          </label>
 
-      <!-- ACCORD -->
-      <label class="party-card">
-        <input type="radio" name="party" value="accord">
-
-        <div class="party-content">
-          <img src="IMG_0096.jpeg" alt="ACCORD">
-          <div class="details">
-            <h3>ACCORD</h3>
-            <p>
-              <strong id="accordVotes">0</strong> votes —
-              <strong id="accordPercent">0%</strong>
-            </p>
-            <div class="bar">
-              <div id="accordBar"></div>
+          <!-- ACCORD -->
+          <label class="party" for="accord">
+            <input id="accord" name="party" type="radio" value="accord">
+            <div class="party-inner">
+              <img class="party-logo" src="IMG_0096.jpeg" alt="ACCORD logo" loading="lazy">
+              <div class="party-info">
+                <div class="party-name">ACCORD</div>
+                <div class="party-stats">
+                  <span class="votes" id="accordVotes">0</span>
+                  <span class="percent" id="accordPercent">0%</span>
+                </div>
+                <div class="bar">
+                  <div class="bar-fill" id="accordBar" style="width:0%"></div>
+                </div>
+              </div>
             </div>
-          </div>
+          </label>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary" id="submitBtn">Submit Vote</button>
+          <button type="button" class="btn secondary" id="clearBtn" title="Clear demo data">Reset demo</button>
         </div>
-      </label>
 
-      <button type="submit" class="submit-btn">Submit Vote</button>
-    </form>
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
 
-    <p id="message"></p>
-  </section>
+    <aside class="panel results-panel" aria-labelledby="resultsTitle">
+      <h2 id="resultsTitle">Live results</h2>
+      <p class="small">Totals are local to your browser (demo). Bars animate on update.</p>
+      <ul class="summary" aria-hidden="false">
+        <li><strong id="totalVotes">0</strong> total votes</li>
+        <li><span id="yourVote">You haven't voted yet</span></li>
+      </ul>
+    </aside>
+  </main>
 
-</main>
+  <footer class="site-footer">
+    <small>Demo voting UI — not a production voting system.</small>
+  </footer>
 
-
-
-<script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
