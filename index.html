@@ -34,7 +34,12 @@
         <input type="radio" name="party" value="apc">
 
         <div class="party-content">
-          <img src="IMG_0094.webp" alt="APC">
+          <div class="logo-wrapper">
+            <div id="apcCrown" class="crown-icon" style="display: none;">
+              <img src="crown.png" alt="Winner Crown">
+            </div>
+            <img src="IMG_0094.webp" alt="APC">
+          </div>
           <div class="details">
             <h3>APC</h3>
             <p>
@@ -53,7 +58,12 @@
         <input type="radio" name="party" value="pdp">
 
         <div class="party-content">
-          <img src="IMG_0095.webp" alt="PDP">
+          <div class="logo-wrapper">
+            <div id="pdpCrown" class="crown-icon" style="display: none;">
+              <img src="crown.png" alt="Winner Crown">
+            </div>
+            <img src="IMG_0095.webp" alt="PDP">
+          </div>
           <div class="details">
             <h3>PDP</h3>
             <p>
@@ -72,7 +82,12 @@
         <input type="radio" name="party" value="accord">
 
         <div class="party-content">
-          <img src="IMG_0096.jpeg" alt="ACCORD">
+          <div class="logo-wrapper">
+            <div id="accordCrown" class="crown-icon" style="display: none;">
+              <img src="crown.png" alt="Winner Crown">
+            </div>
+            <img src="IMG_0096.jpeg" alt="ACCORD">
+          </div>
           <div class="details">
             <h3>ACCORD</h3>
             <p>
@@ -86,7 +101,7 @@
         </div>
       </label>
 
-      <button type="submit" class="submit-btn">Submit Vote</button>
+      <button type="submit" id="submit-btn">Submit Vote</button> 
     </form>
 
     <p id="message"></p>
