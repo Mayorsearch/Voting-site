@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INEC Voting Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Independent National Electoral Commission</h1>
+  <p>Live Voting & Result Collation</p>
+</header>
+
+<main class="container">
+
+  <section class="instructions">
+    <h2>Voting Instructions</h2>
+    <ol>
+      <li>Select only one political party</li>
+      <li>Submit your vote once</li>
+      <li>Results update instantly</li>
+    </ol>
+  </section>
+
+  <section class="vote-section">
+    <h2>Cast Your Vote</h2>
+
+    <form id="voteForm">
+
+      <!-- APC -->
+      <label class="party-card">
+        <input type="radio" name="party" value="apc">
+
+        <div class="party-content">
+          <img src="IMG_0094.webp" alt="APC">
+          <div class="details">
+            <h3>APC</h3>
+            <p>
+              <strong id="apcVotes">0</strong> votes —
+              <strong id="apcPercent">0%</strong>
+            </p>
+            <div class="bar">
+              <div id="apcBar"></div>
+            </div>
+          </div>
+        </div>
+      </label>
+
+      <!-- PDP -->
+      <label class="party-card">
+        <input type="radio" name="party" value="pdp">
+
+        <div class="party-content">
+          <img src="IMG_0095.webp" alt="PDP">
+          <div class="details">
+            <h3>PDP</h3>
+            <p>
+              <strong id="pdpVotes">0</strong> votes —
+              <strong id="pdpPercent">0%</strong>
+            </p>
+            <div class="bar">
+              <div id="pdpBar"></div>
+            </div>
+          </div>
+        </div>
+      </label>
+
+      <!-- ACCORD -->
+      <label class="party-card">
+        <input type="radio" name="party" value="accord">
+
+        <div class="party-content">
+          <img src="IMG_0096.jpeg" alt="ACCORD">
+          <div class="details">
+            <h3>ACCORD</h3>
+            <p>
+              <strong id="accordVotes">0</strong> votes —
+              <strong id="accordPercent">0%</strong>
+            </p>
+            <div class="bar">
+              <div id="accordBar"></div>
+            </div>
+          </div>
+        </div>
+      </label>
+
+      <button type="submit" class="submit-btn">Submit Vote</button>
+    </form>
+
+    <p id="message"></p>
+  </section>
+
+</main>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
