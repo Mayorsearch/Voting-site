@@ -107,9 +107,27 @@
     <p id="message"></p>
   </section>
 
+  <!-- CHAT SECTION -->
+  <section class="chat-section" id="chatSection" style="display: none;">
+    <h2>Voter Discussion</h2>
+    <div class="chat-box" id="chatBox">
+      <div class="chat-messages" id="chatMessages">
+        <!-- Messages will appear here -->
+      </div>
+    </div>
+    <form id="chatForm" class="chat-input-form">
+      <input 
+        type="text" 
+        id="chatInput" 
+        placeholder="Share your thoughts..." 
+        maxlength="200"
+        required
+      >
+      <button type="submit" id="sendBtn">Send</button>
+    </form>
+  </section>
+
 </main>
-
-
 
 <script src="script.js"></script>
 </body>
