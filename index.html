@@ -15,117 +15,176 @@
 
 <main class="container">
 
-  <section class="instructions">
-    <h2>Voting Instructions</h2>
-    <ol>
-      <li>Select only one political party</li>
-      <li>Submit your vote once</li>
-      <li>Results update instantly</li>
-    </ol>
-  </section>
-
-  <section class="vote-section">
-    <h2>Cast Your Vote</h2>
-
-    <form id="voteForm">
-
-      <!-- APC -->
-      <label class="party-card">
-        <input type="radio" name="party" value="apc">
-
-        <div class="party-content">
-          <div class="logo-wrapper">
-            <div id="apcCrown" class="crown-icon" style="display: none;">
-              <img src="crown.png" alt="Winner Crown">
-            </div>
-            <img src="IMG_0094.webp" alt="APC">
-          </div>
-          <div class="details">
-            <h3>APC</h3>
-            <p>
-              <strong id="apcVotes">0</strong> votes —
-              <strong id="apcPercent">0%</strong>
-            </p>
-            <div class="bar">
-              <div id="apcBar"></div>
-            </div>
-          </div>
-        </div>
-      </label>
-
-      <!-- PDP -->
-      <label class="party-card">
-        <input type="radio" name="party" value="pdp">
-
-        <div class="party-content">
-          <div class="logo-wrapper">
-            <div id="pdpCrown" class="crown-icon" style="display: none;">
-              <img src="crown.png" alt="Winner Crown">
-            </div>
-            <img src="IMG_0095.webp" alt="PDP">
-          </div>
-          <div class="details">
-            <h3>PDP</h3>
-            <p>
-              <strong id="pdpVotes">0</strong> votes —
-              <strong id="pdpPercent">0%</strong>
-            </p>
-            <div class="bar">
-              <div id="pdpBar"></div>
-            </div>
-          </div>
-        </div>
-      </label>
-
-      <!-- ACCORD -->
-      <label class="party-card">
-        <input type="radio" name="party" value="accord">
-
-        <div class="party-content">
-          <div class="logo-wrapper">
-            <div id="accordCrown" class="crown-icon" style="display: none;">
-              <img src="crown.png" alt="Winner Crown">
-            </div>
-            <img src="IMG_0096.jpeg" alt="ACCORD">
-          </div>
-          <div class="details">
-            <h3>ACCORD</h3>
-            <p>
-              <strong id="accordVotes">0</strong> votes —
-              <strong id="accordPercent">0%</strong>
-            </p>
-            <div class="bar">
-              <div id="accordBar"></div>
-            </div>
-          </div>
-        </div>
-      </label>
-
-      <button type="submit" id="submit-btn">Submit Vote</button> 
-    </form>
-
-    <p id="message"></p>
-  </section>
-
-  <!-- CHAT SECTION -->
-  <section class="chat-section" id="chatSection" style="display: none;">
-    <h2>Voter Discussion</h2>
-    <div class="chat-box" id="chatBox">
-      <div class="chat-messages" id="chatMessages">
-        <!-- Messages will appear here -->
+  <!-- LOGIN SECTION -->
+  <section class="login-section" id="loginSection">
+    <h2>Voter Login</h2>
+    <p class="login-description">Please enter your voter credentials to access the voting portal</p>
+    
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="voterName">Full Name</label>
+        <input 
+          type="text" 
+          id="voterName" 
+          placeholder="Enter your full name" 
+          required
+          minlength="3"
+        >
       </div>
-    </div>
-    <form id="chatForm" class="chat-input-form">
-      <input 
-        type="text" 
-        id="chatInput" 
-        placeholder="Share your thoughts..." 
-        maxlength="200"
-        required
-      >
-      <button type="submit" id="sendBtn">Send</button>
+      
+      <div class="form-group">
+        <label for="voterID">Voter ID Number</label>
+        <input 
+          type="text" 
+          id="voterID" 
+          placeholder="Enter your voter ID" 
+          required
+          minlength="5"
+          maxlength="20"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="voterEmail">Email Address</label>
+        <input 
+          type="email" 
+          id="voterEmail" 
+          placeholder="Enter your email" 
+          required
+        >
+      </div>
+      
+      <button type="submit" class="login-btn">Login to Vote</button>
     </form>
+    
+    <p id="loginMessage"></p>
   </section>
+
+  <!-- VOTING SECTIONS (Initially Hidden) -->
+  <div id="votingContent" style="display: none;">
+    
+    <!-- User Info Bar -->
+    <section class="user-info-bar">
+      <div class="user-details">
+        <strong>Logged in as:</strong> <span id="displayVoterName"></span>
+        <span class="voter-id-display">ID: <span id="displayVoterID"></span></span>
+      </div>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </section>
+
+    <section class="instructions">
+      <h2>Voting Instructions</h2>
+      <ol>
+        <li>Select only one political party</li>
+        <li>Submit your vote once</li>
+        <li>Results update instantly</li>
+      </ol>
+    </section>
+
+    <section class="vote-section">
+      <h2>Cast Your Vote</h2>
+
+      <form id="voteForm">
+
+        <!-- APC -->
+        <label class="party-card">
+          <input type="radio" name="party" value="apc">
+
+          <div class="party-content">
+            <div class="logo-wrapper">
+              <div id="apcCrown" class="crown-icon" style="display: none;">
+                <img src="crown.png" alt="Winner Crown">
+              </div>
+              <img src="IMG_0094.webp" alt="APC">
+            </div>
+            <div class="details">
+              <h3>APC</h3>
+              <p>
+                <strong id="apcVotes">0</strong> votes —
+                <strong id="apcPercent">0%</strong>
+              </p>
+              <div class="bar">
+                <div id="apcBar"></div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <!-- PDP -->
+        <label class="party-card">
+          <input type="radio" name="party" value="pdp">
+
+          <div class="party-content">
+            <div class="logo-wrapper">
+              <div id="pdpCrown" class="crown-icon" style="display: none;">
+                <img src="crown.png" alt="Winner Crown">
+              </div>
+              <img src="IMG_0095.webp" alt="PDP">
+            </div>
+            <div class="details">
+              <h3>PDP</h3>
+              <p>
+                <strong id="pdpVotes">0</strong> votes —
+                <strong id="pdpPercent">0%</strong>
+              </p>
+              <div class="bar">
+                <div id="pdpBar"></div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <!-- ACCORD -->
+        <label class="party-card">
+          <input type="radio" name="party" value="accord">
+
+          <div class="party-content">
+            <div class="logo-wrapper">
+              <div id="accordCrown" class="crown-icon" style="display: none;">
+                <img src="crown.png" alt="Winner Crown">
+              </div>
+              <img src="IMG_0096.jpeg" alt="ACCORD">
+            </div>
+            <div class="details">
+              <h3>ACCORD</h3>
+              <p>
+                <strong id="accordVotes">0</strong> votes —
+                <strong id="accordPercent">0%</strong>
+              </p>
+              <div class="bar">
+                <div id="accordBar"></div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <button type="submit" id="submit-btn">Submit Vote</button> 
+      </form>
+
+      <p id="message"></p>
+    </section>
+
+    <!-- CHAT SECTION -->
+    <section class="chat-section" id="chatSection" style="display: none;">
+      <h2>Voter Discussion</h2>
+      <div class="chat-box" id="chatBox">
+        <div class="chat-messages" id="chatMessages">
+          <!-- Messages will appear here -->
+        </div>
+      </div>
+      <form id="chatForm" class="chat-input-form">
+        <input 
+          type="text" 
+          id="chatInput" 
+          placeholder="Share your thoughts..." 
+          maxlength="200"
+          required
+        >
+        <button type="submit" id="sendBtn">Send</button>
+      </form>
+    </section>
+
+  </div>
 
 </main>
 
