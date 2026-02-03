@@ -31,8 +31,17 @@ let voteForm = document.getElementById("voteForm");
 let submitBtn = document.getElementById("submit-btn");
 let message = document.getElementById("message");
 
-// Flag to track if voting has ended
+// Chat elements
+let chatSection = document.getElementById("chatSection");
+let chatForm = document.getElementById("chatForm");
+let chatInput = document.getElementById("chatInput");
+let chatMessages = document.getElementById("chatMessages");
+
+// Flag to track if voting has ended and voter info
 let votingEnded = false;
+let hasVoted = false;
+let voterParty = "";
+let voterNumber = 0;
 
 // Function to update percentages and bars
 function updateResults() {
@@ -88,6 +97,13 @@ function checkWinner(candidateName, candidateCount, partyValue) {
     return false;
 }
 
+// Function to show chat section
+function showChatSection() {
+    chatSection.style.display = "block";
+    // Scroll to chat section smoothly
+    chatSection.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 // Function to handle voting
 function votecount(e) {
     e.preventDefault();
@@ -95,6 +111,13 @@ function votecount(e) {
     // Check if voting has already ended
     if (votingEnded) {
         message.textContent = "Voting has ended!";
+        message.style.color = "orange";
+        return;
+    }
+
+    // Check if user has already voted
+    if (hasVoted) {
+        message.textContent = "You have already voted!";
         message.style.color = "orange";
         return;
     }
@@ -108,24 +131,82 @@ function votecount(e) {
         return;
     }
 
+    // Mark as voted and store party
+    hasVoted = true;
+    voterParty = selectedParty.value.toUpperCase();
+
     // Clear any previous message
     message.textContent = "";
 
     // Increment the vote for the selected party and check for winner
     if (selectedParty.value === "apc") {
         apcVotescount++;
+        voterNumber = apcVotescount;
         updateResults();
         checkWinner("APC", apcVotescount, "apc");
     } else if (selectedParty.value === "pdp") {
         pdpVotescount++;
+        voterNumber = pdpVotescount;
         updateResults();
         checkWinner("PDP", pdpVotescount, "pdp");
     } else if (selectedParty.value === "accord") {
         accordVotescount++;
+        voterNumber = accordVotescount;
         updateResults();
         checkWinner("ACCORD", accordVotescount, "accord");
     }
+
+    // Show chat section after voting
+    showChatSection();
+    
+    // Display success message
+    message.textContent = "Your vote has been recorded! You can now chat with other voters.";
+    message.style.color = "green";
 }
 
-// Attach event listener to the form submit event
+// Function to add message to chat
+function addChatMessage(voterName, messageText) {
+    let messageDiv = document.createElement("div");
+    messageDiv.className = "chat-message";
+    
+    let now = new Date();
+    let timeString = now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
+    
+    messageDiv.innerHTML = `
+        <div class="voter-name">${voterName}</div>
+        <div class="message-text">${messageText}</div>
+        <div class="message-time">${timeString}</div>
+    `;
+    
+    chatMessages.appendChild(messageDiv);
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Function to handle chat submission
+function handleChatSubmit(e) {
+    e.preventDefault();
+    
+    let messageText = chatInput.value.trim();
+    
+    if (messageText === "") {
+        return;
+    }
+    
+    // Create voter name
+    let voterName = voterParty + " Voter " + voterNumber;
+    
+    // Add message to chat
+    addChatMessage(voterName, messageText);
+    
+    // Clear input
+    chatInput.value = "";
+}
+
+// Attach event listeners
 voteForm.addEventListener("submit", votecount);
+chatForm.addEventListener("submit", handleChatSubmit);
